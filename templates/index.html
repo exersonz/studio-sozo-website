@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+    <img src="{{ url_for('static', filename='images/mascot.jpg') }}" alt="studio sozo cat mascot" class="mascot">
+    <h1>studio sozo</h1>
+    <p>We offer free design for clubs, businesses, organizations, and projects. Logos,
+    posters, Instagram templates, and more!</p>   
+    <div class="actions">
+        <a class="btn btn-green" href="{{ commission_url }}" target="_blank" rel="noopener">Request a commission</a>
+        <a class="btn btn-purple" href="{{ volunteer_url }}" target="_blank" rel="noopener">Volunteer with us</a>
+    </div>
+</section>
+
+<section class="works">
+    <h2>Previous work</h2>
+    {% if works %}
+    <div class="slideshow" aria-roledescription="carousel" aria-label="Previous commissions">
+        {% for w in works %}
+        <img src="{{ url_for('static', filename=w) }}" alt="Commission by studio sozo, {{ loop.index }} of {{ works|length }}" class="slide{% if loop.first %} active{% endif %}">
+        {% endfor %}
+        <button class="nav prev" aria-label="Previous slide">&#8249;</button>
+        <button class="nav next" aria-label="Next slide">&#8250;</button>
+        <div class="dots"></div>
+    </div>
+    {% else %}
+    <p class="empty">Add images to <code>static/images/works/</code> and they will appear here.</p>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_js %}<script src="{{ url_for('static', filename='js/slideshow.js') }}"></script>{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Contact - studio sozo{% endblock %}
+{% block content %}
+<section class="contact">
+    <a href="{{ url_for('index') }}" class="back">&#8249; Back home</a>
+    <h1>Contact us</h1>
+    <p>Write your message below and your email app will open with it ready to send to
+       <a href="mailto:{{ email }}">{{ email }}</a>.</p>
+
+    <div class="mail-form" data-to="{{ email }}">
+        <label for="name">Your name</label>
+        <input id="name" type="text" autocomplete="name">
+        <label for="subject">Subject</label>
+        <input id="subject" type="text" value="Hello studio sozo">
+        <label for="message">Message</label>
+        <textarea id="message" rows="7"></textarea>
+        <button type="button" class="btn btn-green" id="send">Send email</button>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('send').addEventListener('click', () => {
+    const f = document.querySelector('.mail-form');
+    const name = document.getElementById('name').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const msg = document.getElementById('message').value.trim();
+    const body = (name ? 'From: ' + name + '\n\n' : '') + msg;
+    window.location.href = 'mailto:' + f.dataset.to +
+        '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+});
+</script>
+{% endblock %}
