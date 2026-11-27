@@ -1,7 +1,11 @@
 import os
 from flask import Flask, render_template
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="public",
+    static_url_path=""
+)
 
 COMMISSION_FORM_URL = "https://docs.google.com/forms/d/1bYs78Cqnlo5k7U38rH_MGoZZxYja5dneQ4D7BNjPIMs/viewform"
 VOLUNTEER_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf_tyEvDfEuydYH_9z5Dsof82SRR8Ev2TCQUYJtFFAQnNZ6Pg/viewform?fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAacruamPnU5d8Vfo-uSplcZHBD5fR_U_jXDT8yfdup420ZSRvOx3ned6tmiAAw_aem_QvaAjQD1ftUhzJ6IR9hIQg"
